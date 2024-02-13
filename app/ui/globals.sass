@@ -1,0 +1,138 @@
+$animation-bg-timing: 5s
+
+:root
+  --bg-color-1: #ad2d77f9
+  --bg-color-2: #570b37
+
+*
+  margin: 0
+  padding: 0
+  list-style: none
+  text-decoration: none
+  box-sizing: border-box
+
+a
+  color: #ececec
+
+body
+  background: var(--bg-color-1)
+  overflow: hidden
+
+main
+  width: 100vw
+  height: 100vh
+  position: relative
+  // animation: bgcolor $animation-bg-timing ease infinite
+
+.aclaration
+  font-size: 12px
+  font-style: italic 
+  font-weight: lighter
+
+.form
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  input[type='radio']
+    margin-right: 3px
+    accent-color: #db7093
+  button[type='submit']
+    padding: 5px
+    border: 2px solid var(--bg-color-2)
+    border-radius: 10px
+    background: transparent
+    backdrop-filter: blur(2px)
+    &:hover,
+    &:focus
+      border: 2px dotted 
+
+.text
+  font-size: 24px
+  text-align: center
+  color: #ccc
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  
+  &--top
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &--bot
+    margin-top: 15px
+    a
+      margin: 10px 15px
+      width: fit-content
+      display: inline-block
+ 
+.bg__heart
+  position: absolute
+
+  &--holder
+    width: 25px
+    height: 25px
+    position: relative
+
+    svg
+      position: absolute
+      animation: beatmove 1250ms ease 1s infinite
+      width: 100%
+      height: 100%
+
+.text__heart
+  position: relative
+  transform: translate(-50%, -20%)
+  display: inline-block
+  margin-inline: 15px
+  width: 25px
+  height: 25px
+
+  svg
+    position: absolute
+    top: 7px
+    width: 25px
+    height: 25px
+    animation: beatshow 1250ms linear infinite
+
+// KEYFRAMES
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
++keyframes(beatmove)
+  0%
+    top: 0
+  33%
+    top: -10px
+    transform: scale(0.8)
+  66%
+    top: 10px
+    transform: scale(1.2)
+  100%
+    top: 0
+
++keyframes(beatshow)
+  0%
+    opacity: 1
+  50% 
+    opacity: 0.5
+  100%
+    opacity: 1
+
+// MEDIA QUERYS
+@media screen and (min-width: 1024px)
+  .bg__heart
+    &--holder
+      width: 50px
+      height: 50px
+  .text-heart
+    margin-inline: 5px
