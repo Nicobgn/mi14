@@ -2,10 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import fetchForm from "../libs/fetchForm";
+import { useState } from "react";
 
 // import Redirect from "../libs/Redirect";
 const Form = () => {
   const router = useRouter()
+	const [loading, setLoading] = useState(false)
+	const [submitStatus, setSubmitStatus] = useState(0)
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const { target } = e;
@@ -27,8 +31,13 @@ const Form = () => {
       }
     
     const response = await fetchForm(newTarget);
-    console.log(response);
-    response === 200 ? router.push('/confirmacion') : router.push('/acepto');
+    
+    setTimeout(() => {
+			response === 200 ? setSubmitStatus(200) : setSubmitStatus(response)
+			setLoading(false)
+		}, 1000)
+
+    setTimeout(()=> response === 200 ? router.push('/confirmacion') : router.push('/acepto'), 1700)
   }
 
   return (
@@ -64,10 +73,22 @@ const Form = () => {
           <label htmlFor="formal">Lo más formal que se pueda</label>
         </li>
       </ul>
-      <button type="submit">Enviar</button>
+      <button 
+					type="submit"
+					className={`${loading ? 'loading' : ''}${submitStatus === 0 ? '' : submitStatus === 200? 'success' : 'failed' }`}
+				>
+					<span>
+						{(submitStatus === 0 && !loading) ? 'Enviar' : ''}
+						{(submitStatus !== 0 && submitStatus === 200 && !loading) 
+								?	(<i className="fa-solid fa-check"></i>) 
+								: (submitStatus !== 0 && submitStatus !== 200 && !loading) 
+									? (<i className="fa-solid fa-xmark"></i>) 
+									: ''
+						}
+					</span>
+				</button>
     </form>
   )
-
 }
 
 const page = () => {

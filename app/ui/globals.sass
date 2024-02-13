@@ -34,18 +34,71 @@ main
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
+  
   input[type='radio']
     margin-right: 3px
     accent-color: #db7093
-  button[type='submit']
-    padding: 5px
-    border: 2px solid var(--bg-color-2)
-    border-radius: 10px
-    background: transparent
-    backdrop-filter: blur(2px)
-    &:hover,
-    &:focus
-      border: 2px dotted 
+  
+  button
+    cursor: pointer
+    color: var(--gen-clr)
+    border: 2px solid var(--quart)
+    padding: 5px 10px
+    border-radius: 3rem
+    height: 30px
+    width: 70px
+    position: relative
+    background: none
+    transition: all 100ms ease
+    text-align: center
+
+    &.loading
+      width: 50px
+      border: 3px solid var(--bg-color-2)
+
+      &::after
+        content: ''
+        position: absolute
+        height: 100%
+        width: 100%
+        top: -3px
+        left: -3px
+
+        border-radius: 3rem
+        border: 3px solid transparent
+        border-top-color: #888
+        animation: loading 1s linear infinite
+
+      &::before
+        width: 0
+        height: 0
+        top: 50
+        left: 50
+
+    &.success
+      width: 50px
+        
+      &:hover::before,
+      &:focus::before
+        box-shadow: inset 0 0 0 60px #0f0
+
+    &.failed
+      width: 50px
+
+      &:hover::before,
+      &:focus::before
+        box-shadow: inset 0 0 0 60px #f00
+
+    &::before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      height: 100%
+      width: 100%
+      transition: width 100ms ease, box-shadow 500ms ease
+      border-radius: 3rem
+      box-shadow: inset 0 0 0 1px var(--bg-color-2)
 
 .text
   font-size: 24px
@@ -67,7 +120,7 @@ main
       margin: 10px 15px
       width: fit-content
       display: inline-block
- 
+
 .bg__heart
   position: absolute
 
