@@ -56,5 +56,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
         with:
-          source: ./artifacts
+          artifact_name: artifact-out
           token: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_URL }}
