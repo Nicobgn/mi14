@@ -25,10 +25,12 @@ const Form = () => {
             [element.name]: element.value
           }
       }
-    console.log(newTarget)
+    
     const response = await fetchForm(newTarget);
-    response.status === 200 ? router.push('/confirmacion') : router.push('/acepto');
+    console.log(response);
+    response === 200 ? router.push('/confirmacion') : router.push('/acepto');
   }
+
   return (
     <form className="form" onSubmit={onSubmit}>
       <label>¿Qué día lo festejamos?</label>
